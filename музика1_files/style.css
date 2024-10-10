@@ -750,7 +750,7 @@ header {
 }
 
 .propsition-content p {
-  background-image: url(../img/bg-service.png);
+ background: #030139;
   background-size: cover;
   background-position: 60% 50%;
   padding: 60px 30px 45px 30px;
