@@ -1,0 +1,286 @@
+//active class to navigation
+$('nav ul li a').click(function (a) {
+  $('nav ul li a').removeClass('nav-active');
+  $(this).addClass('nav-active');
+});
+
+$(window).scroll(function () {
+  if ($(this).scrollTop() < 1) {
+    $("nav ul li a").removeClass("nav-active");
+  }
+});
+
+//menu mobile
+(function ($) {
+  $(function () {
+    $('#nav-toggle').click(function () {
+      $('nav ul').slideToggle(
+      );
+    });
+    // Hamburger to X toggle
+    $('#nav-toggle').on('click', function () {
+      this.classList.toggle('active');
+    });
+
+    $('#menu li a').on("click", function () {
+      $('#menu').hide();
+      $("#nav-toggle").removeClass("active");
+    });
+  });
+})(jQuery);
+
+$(document).ready(function () {
+
+  //slow movement
+  $("#menu a, button[name]").click(function (event) {
+    event.preventDefault();
+    var id = $(this).attr('name');
+    if ($(this)[0].nodeName === 'A') {
+      id = $(this).attr('href');
+    }
+    if (!id) {
+      return;
+    }
+    var top = $(id).offset().top - 70;
+    $('body,html').animate({ scrollTop: top }, 1000);
+  });
+
+  //button up
+  $('.btn_up').click(function () {
+    $('body').animate({ 'scrollTop': 0 }, 1000);
+    $('html').animate({ 'scrollTop': 0 }, 1000);
+  });
+  $(window).scroll(function () {
+    if ($(window).scrollTop() > 300) {
+      $('.btn_up').addClass('btn_up_active');
+    } else {
+      $('.btn_up').removeClass('btn_up_active');
+    }
+  });
+
+  // fixed scroll menu
+  $("#header").removeClass("navbar-fixed");
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 30) {
+      $("#header").addClass("navbar-fixed").fadeIn('fast');
+    } else {
+      $("#header").removeClass("navbar-fixed").fadeIn('fast');
+    }
+  });
+});
+
+//gallery
+$(document).ready(function () {
+  $("#lightSlider").bxSlider({
+    controls: false,
+    auto: true,
+    pause: 10000,
+  });
+
+  $('#gallery').lightGallery({
+    selector: 'li'
+  });
+  $('#show_more').click(function () {
+    $('#more_photo').css("display", "flex");
+    $('#photo').css("display", "block");
+    $('#show_more').css("display", "none");
+  });
+});
+
+// Video gallery
+$(document).ready(function () {
+  $.get(
+    "https://www.googleapis.com/youtube/v3/search", {
+      part: 'snippet',
+      key: 'AIzaSyC4sWiDCNdcD8ZfAvrTZyPM6A4voZxcf58',
+      channelId: 'UCKo3EH_mkORJ8xJGivDOohw',
+      maxResults: 8,
+      order: 'date',
+      type: 'video',
+    },
+    function (data) {
+      $.each(data.items, function (i, item) {
+        var videos = '<li style="background-image: url(' + item.snippet.thumbnails.high.url +
+          '" class="video-content" video-src="https://www.youtube.com/embed/' + item.id.videoId +
+          '?modestbranding=1"> <img class="play-icon" src="img/play.svg" alt="play"></li>';
+        $('#video-list').append(videos);
+      });
+    }
+  );
+});
+
+$('body').on('click', '[video-src]', function (e) {
+  e.preventDefault();
+  var $this = $(this);
+  var videoUrl = $this.attr("video-src");
+  var $popupIframe = $('#modal').find("iframe");
+  $popupIframe.attr("src", videoUrl);
+  $('#modal').addClass("show-modal");
+});
+
+$('.video-content').click(function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+  $('#modal').addClass("show-modal");
+});
+
+$('.close').click(function () {
+  $('#modal').removeClass("show-modal");
+  $('iframe').attr('src', $('iframe').attr('src'));
+});
+
+$(window).click(function (e) {
+  if (e.target.className !== 'modal-content' && e.target.parentNode.className !== 'video-content' && e.target.className !== 'video-content') {
+    $('#modal').removeClass("show-modal");
+    $('iframe').attr('src', $('iframe').attr('src'));
+  }
+});
+// end video galerry
+
+//Form validation
+; (function ($) {
+  jQuery.fn.sendFormLP = function (options) {
+    options = $.extend({
+      toEmail: 'oleg-pukas@ukr.net',
+      fromEmail: 'info@djbravo.ua',
+      interval: 9000
+    }, options);
+    var make = function () {
+      $(this).submit(function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var i = true;
+        var toEmail = options.toEmail;
+        var fromEmail = options.fromEmail;
+        var them = "Тема: ";
+        var $items = $this.find('[name]');
+        var $required = $this.find('[data-required]');
+        var objShow = $this.data('show');
+        $items.removeClass('error');
+        $required.each(function () {
+          if ($(this).val() == '') {
+            i = false;
+            $(this).addClass('error');
+          }
+          if ($('[name="phone"]').val().length < 10) {
+            i = false;
+            $('[name="phone"]').addClass('error');
+          }
+        });
+        if (i == true) {
+          var arr = [];
+          var m_action = $this.attr('action');
+
+          $items.each(function () {
+            var nam = $(this).data('name');
+            var val = $(this).val();
+            arr.push(nam + val);
+          });
+          var m_data = '';
+          for (q = 0; q <= arr.length - 1; q++) {
+            m_data = m_data + arr[q] + '\n';
+          }
+          var textSMS = encodeURI(m_data);
+          
+          var url = `https://api.mobizon.ua/service/message/sendsmsmessage?recipient=380672708467&text=${textSMS}&apiKey=uaa1ee056a59fa2f04d9c0da5a4258f51b1108ab3a742278721341a599e34175a4f44e`;
+          var request = $.ajax({
+            type: 'GET',
+            url,
+
+            // success: function (result) {
+            //   $items.val('');
+            //   $(objShow).fadeIn();
+
+            //   setInterval(function () {
+            //     $(objShow).fadeOut();
+            //   }, options.interval);
+            // }
+            
+          });
+
+          request.always(function(result) {
+            console.log(m_data, 'always');
+
+            $.ajax({
+              type: 'POST',
+              url: m_action,
+              data: {
+                m_data: m_data,
+                toEmail: toEmail,
+                fromEmail: fromEmail,
+                them: them
+              },
+  
+              success: function (result) {
+                $items.val('');
+                $(objShow).fadeIn();
+  
+                setInterval(function () {
+                  $(objShow).fadeOut();
+                }, options.interval);
+              }
+            });
+
+              $items.val('');
+              $(objShow).fadeIn();
+
+              setInterval(function () {
+                $(objShow).fadeOut();
+              }, options.interval);
+          });
+        }
+      });
+    };
+    return this.each(make);
+  };
+})(jQuery);
+
+$(function () {
+  $('form').sendFormLP({
+    toEmail: 'oleg-pukas@ukr.net',
+    fromEmail: 'info@djbravo.ua',
+    interval: 9000
+  });
+});
+
+// Check if you scrolled to particular element
+function isScrolledIntoView(elem) {
+  var docViewTop = $(window).scrollTop();
+  var docViewBottom = docViewTop + $(window).height();
+
+  var elemTop = $(elem).offset().top;
+  var elemBottom = elemTop + $(elem).height();
+
+  return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
+// Circles rotation
+$(window).scroll(startCounter);
+function startCounter() {
+  if (isScrolledIntoView($('.number'))) {
+    $(window).off("scroll", startCounter);
+    $(".needle").addClass("needle-animated");
+    $('.number').each(function (index) {
+      var $this = $(this);
+      var value = Math.round($this.text());
+      var needlePosition = parseFloat((215 * parseFloat('0.' + value)).toFixed(1));
+      var cirlceNumber = index + 1;
+
+      $('.circles .circle' + cirlceNumber + ' .needle').css({
+        '-webkit-transform': 'rotate(' + needlePosition + 'deg)',
+        '-moz-transform': 'rotate(' + needlePosition + 'deg)',
+        '-ms-transform': 'rotate(' + needlePosition + 'deg)',
+        '-o-transform': 'rotate(' + needlePosition + 'deg)',
+        'transform': 'rotate(' + needlePosition + 'deg)',
+      });
+
+      jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
+        duration: 1500,
+        easing: 'linear',
+        step: function () {
+          $this.text(Math.ceil(this.Counter));
+        }
+      });
+    });
+  }
+}

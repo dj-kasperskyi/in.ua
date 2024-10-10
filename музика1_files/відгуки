@@ -1,0 +1,61 @@
+  <div class="bx-wrapper" style="max-width: 100%;"><div class="bx-viewport" aria-live="polite" style="width: 100%; overflow: hidden; position: relative; height: 640px;"><ul id="lightSlider" style="width: 3215%; position: relative; transition-duration: 0.5s; transform: translate3d(-2140px, 0px, 0px);"><li class="slide-item bx-clone" style="float: left; list-style: none; position: relative; width: 950px;" aria-hidden="true">
+          <div class="feedback-block">
+            <div class="feedback-content">
+              <p class="text"></p>
+              <div class="user">
+                <img src="./музика1_files/30.jpg" alt="Dj Bravo відгуки">
+               
+              </div>
+            </div>
+            <div class="feedback-content">
+              <p class="text"></p>
+              <div class="user">
+                <img src="./музика1_files/31.jpg" alt="Dj Bravo відгуки">
+                
+              </div>
+            </div>
+            <div class="feedback-content">
+              <p class="text"></p>
+              <div class="user">
+                <img src="./музика1_files/34.jpg" alt="Dj Bravo відгуки">
+                
+              </div>
+            </div>
+            <div class="feedback-content">
+             
+              <div class="user">
+                <img src="./музика1_files/32.jpg" alt="Dj Bravo відгуки">
+                
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="slide-item" style="float: left; list-style: none; position: relative; width: 950px;" aria-hidden="true">
+          <div class="feedback-block">
+            <div class="feedback-content">
+             
+              <div class="user">
+                <img src="./музика1_files/.png" alt="Dj Bravo відгуки">
+               
+              </div>
+            </div>
+          </div>
+       
+            </div>
+          </div>
+        </li></ul></div><div class="bx-controls bx-has-pager"><div class="bx-pager bx-default-pager"><div class="bx-pager-item"><a href="https://www.dj-bravo.in.ua/" data-slide-index="0" class="bx-pager-link">1</a></div><div class="bx-pager-item"><a href="https://www.dj-bravo.in.ua/" data-slide-index="1" class="bx-pager-link active">2</a></div><div class="bx-pager-item"><a href="https://www.dj-bravo.in.ua/" data-slide-index="2" class="bx-pager-link">3</a></div></div></div></div>
+    </div>
+  </section>
+
+
+
+  <img src="./музика1_files/bravo_contact.png" alt="Діджей Bravo">
+    <img class="disk disk-little" src="./музика1_files/disk-little.png" alt="Діджей Bravo">
+
+
+    <img class="disk" src="./музика1_files/disk.png" alt="Діджей Bravo">
+
+    <section class="feedback" id="feedback">
+      <img class="disk disk-little" src="./музика1_files/disk-little.png" alt="Dj Bravo">
+      <div class="container">
+        <h2 class="title page-title">Відгуки</h2>
