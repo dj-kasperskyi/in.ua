@@ -32,10 +32,11 @@
     <div class="container navigation">
     
 
- <a class="brand" href=""><style>
+ <a class="brand" href="">
+   <style>
     .logo {
-        width: 35%; /* Задайте бажану ширину */
-        height: 15%; /* Зберігаємо пропорції */
+        width: 35%; /* Початкова ширина */
+        height: auto; /* Зберігаємо пропорції */
         position: fixed; /* Закріплюємо логотип з боку */
         top: 20px; /* Відступ зверху */
         left: 20px; /* Відступ зліва */
@@ -43,7 +44,21 @@
     }
 </style>
 
-<img class="logo" src="./музика1_files/99.png" alt="Dj Bravo" title="Dj Bravo">
+<img class="logo" id="logo" src="./музика1_files/99.png" alt="Dj Bravo" title="Dj Bravo">
+
+<input type="range" id="logoWidth" min="10" max="100" value="35" step="25">
+<label for="logoWidth">Зміна ширини логотипу</label>
+
+<script>
+    const logo = document.getElementById('logo');
+    const widthInput = document.getElementById('logoWidth');
+
+    widthInput.addEventListener('input', function() {
+        logo.style.width = this.value + '%'; // Зміна ширини на основі значення повзунка
+    });
+</script>
+   
+  
        <div class="">
           <img src="" alt="">
           <div class="tonearm"></div>
